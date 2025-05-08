@@ -1,7 +1,7 @@
 import MeetupList from '@/components/meetups/MeetupList'
 import NewMeetupForm from '@/components/meetups/NewMeetupForm'
 
-const meetups = [
+const mockMeetups = [
     { 
         id: 1, 
         title: "JS Meetup", 
@@ -10,7 +10,8 @@ const meetups = [
     }
 ]
 
-export default function HomePage(){
+export default function HomePage({ meetups }){
+    console.log(meetups)
 
     const addMeetupHandler = (meetupData) => {
         console.log(meetupData)
@@ -23,3 +24,24 @@ export default function HomePage(){
         </>
     )
 } 
+
+export async function getServerSideProps(context){
+    // const req = context.req
+    // const res = context.res
+
+    return {
+        props: {
+            meetups: mockMeetups
+        }
+    }
+}
+
+// get props durring build
+// export async function getStaticProps(){
+//     return {
+//         props: {
+//             meetups: mockMeetups
+//         },
+//         // revalidate: 10 regenerates page on server every 10 seconds, use if need for incremental regeneration.
+//     }
+// }
